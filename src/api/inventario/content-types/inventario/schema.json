@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "inventarios",
+  "info": {
+    "singularName": "inventario",
+    "pluralName": "inventarios",
+    "displayName": "inventario"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cantidad_producto": {
+      "type": "biginteger"
+    },
+    "categorias": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::categoria.categoria"
+    },
+    "productos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::producto.producto"
+    }
+  }
+}

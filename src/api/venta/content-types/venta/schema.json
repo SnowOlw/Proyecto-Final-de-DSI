@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ventas",
+  "info": {
+    "singularName": "venta",
+    "pluralName": "ventas",
+    "displayName": "venta"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Estado_venta": {
+      "type": "boolean",
+      "required": true
+    },
+    "fecha": {
+      "type": "date"
+    },
+    "total": {
+      "type": "biginteger"
+    },
+    "productos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::producto.producto"
+    }
+  }
+}
