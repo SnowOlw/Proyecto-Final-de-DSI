@@ -1,3 +1,17 @@
+<!--Aqui pondremos un encabezado para que dede mas claro y crear cambion a futuro--->
+<div id="header" align="center">  
+  <h3>  <strong>frameworks </strong> </h3>
+  <p>estos son los que mas utilizo y me ciento comodo</p>
+  <p><strong>actualmente estoy  aprendiendo otros</strong></p>
+</p>
+</div>
+
+
+
+
+<!-----------parte normal------------------------------------------------------------>
+
+
 # 🚀 Getting started with Strapi
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
