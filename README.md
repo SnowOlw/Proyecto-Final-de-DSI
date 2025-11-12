@@ -1,8 +1,12 @@
 <!--Aqui pondremos un encabezado para que dede mas claro y crear cambion a futuro--->
 <div id="header" align="center">  
-  <h3>  <strong>frameworks </strong> </h3>
-  <p>estos son los que mas utilizo y me ciento comodo</p>
-  <p><strong>actualmente estoy  aprendiendo otros</strong></p>
+  <h3>  <strong>Gestor de tienda de los 3 hermanos  </strong> </h3>
+  <p>Elaborado por:</p>
+  <p><strong>Pedro José Robleto Cerda 2021-0104I</strong></p>
+    <p><strong>Carlos Arístides Prudencio Chicas 2021-0262I</strong></p>
+<p>En este proyecto se planea una forma ne optimisar la forma de grstion interna de la tienda de los 3 hermanos </p>
+  <p>con el fin de mejorar la productividad de la misma, el proyecto tiene el nombre clave de </p>
+  <p>El chilinguito</p>
 </p>
 </div>
 
