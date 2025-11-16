@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Inventario</title>
+</head>
+<body>
+
+<header> Inventario</header>
+
+<div class="container">
+
+    <a href="index.html" class="btn">⬅ Volver</a>
+
+    <h2>Listado de Productos</h2>
+<!-- en si esta sera la base para el listado de 
+ los proveedores y reportes pero como yo medio me cuesta 
+ el tema del baken prefiero dejarlo con una prueba generada por chatgpt 
+ almenos de esta manera podremos cambiar algo o realizar 
+ de mejor manera la coneccion con la la api.....y talvez con suerte todo
+ funcione -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Stock</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+
+
+
+
+
+
+                <!--eliminar esto para añadir la coneccion con api-->
+                <!-- Datos de ejemplo -->
+                <td>1</td>
+                <td>Jingo</td>
+                <td>bodega </td>
+                <td>34</td>
+                <td>C$ 550</td>
+                <!-- aqui termina el ejemplo pero 
+                 se puede modificar para que se muestre los datos de la api
+                 aun nose como-->
+
+
+
+
+
+
+
+
+                <!-- botones de acciones-->
+                 <!--modificar los href para que tengan una funcionalidad real aparte de llevarte a los otros 
+                 formuracrio si no que elimine deverdad-->
+                <td>
+                    <a class="btn btn-warning" href="inventario_detail.html">Ver</a>
+                    <a class="btn btn-success" href="inventario_form.html">Editar</a>
+                    <a class="btn btn-danger" href="#">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>

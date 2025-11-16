@@ -1,0 +1,94 @@
+
+:root {
+    --bg: #121212;
+    --bg-light: #1e1e1e;
+    --card: #1f1f1f;
+    --text: #ffffff;
+    --text-muted: #bbbbbb;
+    --primary: #4c8bf5;
+    --primary-hover: #3b6dcc;
+    --success: #34c759;
+    --danger: #ff453a;
+    --warning: #ff9f0a;
+    --radius: 10px;
+    --shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    background: #2A7B9B;
+background: linear-gradient(90deg,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+}
+
+header {
+    background: var(--bg-light);
+    padding: 20px;
+    text-align: center;
+    font-size: 1.7rem;
+    box-shadow: var(--shadow);
+}
+
+/* Contenedor general */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* Botones */
+.btn {
+    padding: 12px 18px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: #fff;
+    background: var(--primary);
+    text-align: center;
+    display: block;
+    font-size: 1rem;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: var(--primary-hover);
+}
+
+.btn-success {
+    background: var(--success);
+}
+
+.btn-danger {
+    background: var(--danger);
+}
+
+.btn-warning {
+    background: var(--warning);
+    color: #000;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table thead {
+    background: #2a2a2a;
+}
+
+th, td {
+    padding: 14px;
+    border-bottom: 1px solid #333;
+}
+
+tbody tr:hover {
+    background: #2d2d2d;
+    cursor: pointer;
+}

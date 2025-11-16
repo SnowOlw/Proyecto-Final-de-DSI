@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Formulario de Producto</title>
+</head>
+<body>
+
+<header>📝 Registrar / Editar Producto</header>
+
+<div class="container">
+
+    <a href="index.html" class="btn">⬅ Volver</a>
+
+    <h2>Formulario de Producto</h2>
+
+    <form style="margin-top: 25px; display: flex; flex-direction: column; gap: 20px;">
+
+        <div>
+            <label>Nombre del Producto</label>
+            <input type="text" placeholder="Ej: Zolo Jeans" required
+                style="width: 100%; padding: 12px; border-radius: 8px; background: #2a2a2a; color: #fff; border: 1px solid #444;">
+        </div>
+
+        <div>
+            <label>Categoría</label>
+            <input type="text" placeholder="Ej: Almacén / bodega /vuelo " required
+                style="width: 100%; padding: 12px; border-radius: 8px; background: #2a2a2a; color: #fff; border: 1px solid #444;">
+        </div>
+
+        <div>
+            <label>Stock</label>
+            <input type="number" min="0" placeholder="Ej: 34" required
+                style="width: 100%; padding: 12px; border-radius: 8px; background: #2a2a2a; color: #fff; border: 1px solid #444;">
+        </div>
+
+        <div>
+            <label>Precio (C$)</label>
+            <input type="number" min="0" placeholder="Ej: 150" required
+                style="width: 100%; padding: 12px; border-radius: 8px; background: #2a2a2a; color: #fff; border: 1px solid #444;">
+        </div>
+
+        <div>
+            <label>Descripción</label>
+            <textarea placeholder="Detalles opcionales del producto…" rows="4"
+                style="width: 100%; padding: 12px; border-radius: 8px; background: #2a2a2a; color: #fff; border: 1px solid #444;"></textarea>
+        </div>
+<!--el boton de guardar no hace nada aun falta la coneccion con la api -->
+        <button class="btn btn-success" type="submit">💾 Guardar</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
