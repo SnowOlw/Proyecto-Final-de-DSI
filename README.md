@@ -1,3 +1,21 @@
+<!--Aqui pondremos un encabezado para que dede mas claro y crear cambion a futuro--->
+<div id="header" align="center">  
+  <h3>  <strong>Gestor de tienda de los 3 hermanos  </strong> </h3>
+  <p>Elaborado por:</p>
+  <p><strong>Pedro José Robleto Cerda 2021-0104I</strong></p>
+    <p><strong>Carlos Arístides Prudencio Chicas 2021-0262I</strong></p>
+<p>En este proyecto se planea una forma ne optimisar la forma de grstion interna de la tienda de los 3 hermanos </p>
+  <p>con el fin de mejorar la productividad de la misma, el proyecto tiene el nombre clave de </p>
+  <p>El chilinguito</p>
+</p>
+</div>
+
+
+
+
+<!-----------parte normal------------------------------------------------------------>
+
+
 # 🚀 Getting started with Strapi
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
