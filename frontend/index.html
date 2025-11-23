@@ -3,107 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <title>Los tres Hermanos</title>
-<!--cree una seccion de estilo aqui en enves de hacerlo en el 
-css puesto que por me daba bastantes errores con los demas html 
-y pues para no matarme en crear varios css y no agobiar  mejor de esta forma  y el uso del
-boostrap sera algo mas como extra puesto que con ayuda de chatgpt pude agilizar
-algunas partes-->
-    <style>
-        /* para el menu*/
-                /* en si puedo cambiar el color de todos los 
-                botones o incluso dar degradado desde aqui pero seria 
-                sobrecargar demaciado esta parte*/
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">    <title>Los tres Hermanos</title>
 
-        .sidebar {
-            width: 230px;
-            height: 100vh;
-        background: #000000;
-background: linear-gradient(90deg,rgba(0, 0, 0, 1) 23%, rgba(29, 253, 197, 1) 75%, rgba(78, 69, 252, 1) 100%);
-            position: fixed;
-            left: 0;
-            top: 0;
-            padding: 30px 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            box-shadow: 4px 0 12px rgba(0, 0, 0, 0.5);
-        }
 
-        .sidebar h2 {
-            color: #ffffff;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .menu-btn {
-            padding: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #fff;
-            display: block;
-            transition: 0.2s;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-/*-----me costo volver a recordar como ponerle colores XD 
-pero para ser honesto preferi no usar boostrap por 
-miedo a tener que descargar todo el paquete se que no es mucho
-pero viendo otros proyectos en githup me no me dio mucha comfianza
-el usarlo mejor a la vieja escuela y un poco de ayuda de videos y ia------------*/
-        .btn-inventario { background: #4c8bf5; }
-        .btn-inventario:hover { background: #3b6dcc; }
-
-        .btn-nuevo { background: #34c759; }
-        .btn-nuevo:hover { background: #2fa74d; }
-
-        .btn-proveedores { background: #ff9f0a; color: #000; font-weight: 600; }
-        .btn-proveedores:hover { background: #e38803; color: #000; }
-
-        .btn-reportes { background: #8e44ad; }
-        .btn-reportes:hover { background: #732d91; }
-
-    
-        .main-content {
-            margin-left: 260px;
-            padding: 40px;
-         
-            min-height: 100vh;
-        }
-
-        header {
-            background: #181818;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.6rem;
-            color: #e6e6e6;
-            border-radius: 10px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.35);
-        }
-
-        .container {
-            background: #1f1f1f;
-            color: #d6d6d6; /* en si creo que esta bien...aunque se puede cambiar para que nose quema retinas (NO BLANCO PURO) */
-            padding: 30px;
-            margin-top: 30px;
-            border-radius: 12px;
-        }
-
-    </style>
-<!--fin de la seccion de estilo-->
-<!----- nota: no hacer los demas html antes que el propio index 
-evitar problemas de css------>
+<!--fin de la seccion de estilo
+movi todo el stilo que existia en el index al archivo correspondiente-->
 </head>
-<body>
+<body >
 
     <!-- menu  --><!-- ensi fue buena idea y no me esperaba que funcionara el copiar y pegar stikers XD de chatgpt
      anotacion para el futuro si puedes pegar stiker directamente y funciona para futuro proyectos  me salio mas facil que usar el 
      propio boostrap pero se ve menos profecional pero para este caso funcionara-->
     <div class="sidebar">
         <h2>👕 Inventario</h2>
-
         <a class="menu-btn btn-inventario" href="inventario_list.html">📋 Ver Inventario</a>
         <a class="menu-btn btn-nuevo" href="inventario_form.html">🛍️ Nuevo Producto</a>
         <a class="menu-btn btn-proveedores" href="proveedores_list.html">👥 Proveedores</a>
@@ -111,16 +24,182 @@ evitar problemas de css------>
     </div>
 
     <!-- paneles centrales -->
-    <div class="main-content">
+ <div class="main-content">
+  
+<div class="row g-3 mb-4"><header>Sistema de Inventario - Los tres Hermanos</header></div>
+     
+<!-- FILA: TARJETAS DE MÉTRICAS (Usuarios, Categorías, Productos, Ventas) -->
+    <div class="row g-3 mb-4">
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="panel stat-card bg-stat-1">
+          <div class="stat-icon"><i  class="bi bi-universal-access"></i></div>
+          <div>
 
-        <header>Sistema de Inventario - Los tres Hermanos</header>
+    <!-- pedro hago estas diviciones poolo para prueba 
+     cuando vayasa a conetar simplemente borra lo que ahy dentro
+     y realiza la noneccion si esque asi funciona -->
 
+
+            <div class="stat-value" id="stat-usuarios"></div><!--aqui el numero de la cantidad de usuarios--> 
+            <div class="stat-label">Usuarios</div>
+          <!---------------------------------------- -->
+
+      
+      
+        </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="panel stat-card bg-stat-2">
+          <div class="stat-icon"><i class="bi bi-list-ul" aria-hidden="true"></i></div>
+          <div>
+    <!-- ---------------------------------- -->
+
+
+            <div class="stat-value" id="stat-categorias"></div><!--aqui el numero de categorias-->
+            <div class="stat-label">Categorías</div>
+          
+            <!-- ---------------------------- -->
+
+        </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="panel stat-card bg-stat-3">
+          <div class="stat-icon"><i class="bi bi-cart-fill" aria-hidden="true"></i></div>
+          <div>
+
+    <!-- ------------------------------------- -->
+
+            <div class="stat-value" id="stat-productos"></div><!--aqui el numero de productos-->
+            <div class="stat-label">Productos</div>
+          
+            <!-- ---------------------------------- -->
+
+        
+        </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="panel stat-card bg-stat-4">
+          <div class="stat-icon"><i class="bi bi-currency-dollar" aria-hidden="true"></i></div>
+          <div>
+            
+
+    <!-- paneles centrales -->
+
+            <div class="stat-value" id="stat-ventas"></div><!--aqui el numero de ventas-->
+            <div class="stat-label">Ventas</div>
+         
+            <!-- paneles centrales -->
+
+        
+        
+        </div>
+        </div>
+      </div>
+    </div>
+       
+  
         <div class="container">
             <h2>Panel de Inicio (aun en mejora)</h2>
             <p>pedro aun nose que piensas poner en esta parte pero aqui lo dejo</p>
         </div>
 
+    <!-- FILA: PRODUCTOS MÁS VENDIDOS, ÚLTIMAS VENTAS, PRODUCTOS RECIENTEMENTE AÑADIDOS -->
+
+<div class="row g-3">
+      <!-- Productos más vendidos -->
+      <div class="col-12 col-lg-5">
+        <div class="panel h-100">
+          <h5 class="mb-3">Productos más vendidos</h5>
+
+          <!-- === AQUI: tabla dinámica que llenará Strapi ===
+               Endpoint sugerido en Strapi: GET /api/sales/top-products
+               Reemplazar la <tbody> con los datos devueltos.
+          -->
+          <div class="table-responsive">
+            <table class="table table-sm table-striped mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Título</th>
+                  <th>Total vendido</th>
+                  <th>Cantidad total</th>
+                </tr>
+              </thead>
+              <tbody id="top-products-body">
+
+
+                
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Últimas ventas -->
+      <div class="col-12 col-lg-4">
+        <div class="panel h-100">
+          <h5 class="mb-3">Últimas ventas</h5>
+
+          <!-- === AQUI: tabla dinámica de últimas ventas
+               Endpoint sugerido en Strapi: GET /api/sales?sort=createdAt:desc&limit=5
+               Reemplazar <tbody id="last-sales-body"> con los resultados.
+          -->
+          <div class="table-responsive">
+            <table class="table table-sm mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>#</th>
+                  <th>Producto</th>
+                  <th>Fecha</th>
+                  <th>Venta total</th>
+                </tr>
+              </thead>
+              <tbody id="last-sales-body">
+
+
+
+              
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Productos recientemente añadidos -->
+      <div class="col-12 col-lg-3">
+        <div class="panel h-100">
+          <h5 class="mb-3">Productos recientemente añadidos</h5>
+
+          <!-- === AQUI: lista dinámica de productos recientes
+               Endpoint sugerido en Strapi: GET /api/products?sort=createdAt:desc&limit=4
+               Cada .recent-item puede ser generado por JS con la imagen, título y etiqueta de categoría/precio.
+          -->
+          <div id="recent-products-list">
+            <div class="recent-item">
+              <div class="flex-grow-1">
+                <div"></div>
+                <small class="text-muted"></small>
+              </div>
+              <div>
+                <span class="badge bg-warning text-dark"></span>
+              </div>
+            </div>
+            <!-- Más items serán añadidos aquí por JS -->
+          </div>
+
+        </div>
+      </div>
     </div>
+        
+    </div>
+
 
 </body>
 </html>

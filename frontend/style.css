@@ -13,15 +13,33 @@
     --radius: 10px;
     --shadow: 0 0 10px rgba(0,0,0,0.5);
     font-family: Arial, sans-serif;
+    --bg-main: #121212;
 }
 
 body {
-    background: var(--bg);
-    color: var(--text);
-    margin: 0;
-    padding: 0;
     background: #2A7B9B;
-background: linear-gradient(90deg,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+margin: 0;
+    /* 1. AGREGAR: Mueve todo el contenido del body para dejar espacio a la sidebar */
+    padding-left: 230px; 
+}
+
+
+    .main-content {
+            padding: 40px;
+            background: #2A7B9B;
+            min-height: 100vh;
+        }
+
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #000;
+      color: #d6d6d6; /* en si creo que esta bien...aunque se puede cambiar para que nose quema retinas (NO BLANCO PURO) */
+
+    border-radius:8%;
+    box-shadow: var(--shadow);
 }
 
 header {
@@ -33,14 +51,7 @@ header {
 }
 
 /* Contenedor general */
-.container {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 30px;
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-}
+
 
 /* Botones */
 .btn {
@@ -50,7 +61,7 @@ header {
     color: #fff;
     background: var(--primary);
     text-align: center;
-    display: block;
+    display: inline-block;
     font-size: 1rem;
     transition: 0.2s;
 }
@@ -92,3 +103,93 @@ tbody tr:hover {
     background: #2d2d2d;
     cursor: pointer;
 }
+ .sidebar {
+            width: 230px;
+            height: 100vh;
+        background: #000000;
+
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 30px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 4px 0 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar h2 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .menu-btn {
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            transition: 0.2s;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+/*-----me costo volver a recordar como ponerle colores XD 
+pero para ser honesto preferi no usar boostrap por 
+miedo a tener que descargar todo el paquete se que no es mucho
+pero viendo otros proyectos en githup me no me dio mucha comfianza
+el usarlo mejor a la vieja escuela y un poco de ayuda de videos y ia------------*/
+        .btn-inventario { background: #4c8bf5; }
+        .btn-inventario:hover { background: #3b6dcc; }
+
+        .btn-nuevo { background: #34c759; }
+        .btn-nuevo:hover { background: #2fa74d; }
+
+        .btn-proveedores { background: #ff9f0a; color: #000; font-weight: 600; }
+        .btn-proveedores:hover { background: #e38803; color: #000; }
+
+        .btn-reportes { background: #8e44ad; }
+        .btn-reportes:hover { background: #732d91; }
+
+    
+    
+        header {
+            background: #181818;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.6rem;
+            color: #e6e6e6;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.35);
+        }
+
+        
+ .stat-card {
+      border-radius: 10px;
+      padding: 18px;
+      color: #fff;
+      display:flex;
+      align-items:center;
+      gap:16px;
+    
+    }
+    .stat-icon {
+      width:64px;
+      height:64px;
+      border-radius:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:28px;
+      opacity:0.95;
+      flex-shrink:0;
+    }
+    .stat-value { font-size:1.7rem; font-weight:700; }
+    .stat-label { font-size:0.9rem; color: rgba(255, 255, 255, 0.95); }
+
+    /* Colores similares a la imagen de referencia */
+    .bg-stat-1 { background: linear-gradient(135deg,#55c57a); } /* verde */
+    .bg-stat-2 { background: linear-gradient(135deg,#ff7043); } /* naranja */
+    .bg-stat-3 { background: linear-gradient(135deg,#29b6f6); } /* azul claro */
+    .bg-stat-4 { background: linear-gradient(135deg,#ffca28); } /* amarillo */
