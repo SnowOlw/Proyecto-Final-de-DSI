@@ -11,6 +11,100 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
+
+<!--aqui hice el scrip para que masomenos te guies con los demas suerte-->
+<script>
+const STORAGE_KEY = "ventas_sistema";
+
+function getVentas() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+}
+
+function saveVentas(ventas) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(ventas));
+}
+
+// ==============================
+//  REGISTRAR VENTA DESDE FORM
+// ==============================
+document.getElementById("formVenta").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const producto = document.getElementById("producto").value.trim();
+    const cantidad = Number(document.getElementById("cantidad").value);
+    const precio = Number(document.getElementById("precio").value);
+
+    if (producto === "") return alert("El nombre del producto es obligatorio.");
+    if (isNaN(cantidad) || cantidad <= 0) return alert("Cantidad inválida.");
+    if (isNaN(precio) || precio <= 0) return alert("Precio inválido.");
+
+    const fecha = new Date().toISOString().split("T")[0]; // fecha YYYY-MM-DD
+
+    const venta = {
+        id: Date.now(),
+        producto,
+        cantidad,
+        precio,
+        total: cantidad * precio,
+        fecha
+    };
+
+    const ventas = getVentas();
+    ventas.push(venta);
+    saveVentas(ventas);
+
+    alert("Venta registrada exitosamente.");
+
+    this.reset();
+    mostrarVentas();
+});
+
+// ==============================
+//  MOSTRAR VENTAS EN TABLA
+// ==============================
+function mostrarVentas(filtroFecha = "") {
+    const ventas = getVentas();
+    const tabla = document.getElementById("tabla-ventas");
+
+    let filtradas = ventas;
+    if (filtroFecha.trim() !== "") {
+        filtradas = ventas.filter(v => v.fecha === filtroFecha);
+    }
+
+    if (filtradas.length === 0) {
+        tabla.innerHTML = "<tr><td colspan='5'>No hay registros para mostrar</td></tr>";
+        return;
+    }
+
+    tabla.innerHTML = filtradas.map(v => `
+        <tr>
+            <td>${v.fecha}</td>
+            <td>${v.producto}</td>
+            <td>${v.cantidad}</td>
+            <td>C$ ${v.precio.toFixed(2)}</td>
+            <td><strong>C$ ${v.total.toFixed(2)}</strong></td>
+        </tr>
+    `).join("");
+}
+
+// ==============================
+//  FILTRO POR FECHA
+// ==============================
+function filtrarPorFecha() {
+    const fecha = document.getElementById("filtroFecha").value;
+    mostrarVentas(fecha);
+}
+
+// ==============================
+//  CARGAR AL INICIO
+// ==============================
+document.addEventListener("DOMContentLoaded", () => {
+    mostrarVentas();
+});
+</script>
+
+
+
 <body>
     
     <div class="sidebar">
@@ -32,7 +126,51 @@
             <a href="index.html" class="btn d-inline-block btn-secondary mt-3">Volver al inicio</a>
 
             <div class="mt-4 p-3 panel" style="background: var(--card); border-radius: var(--radius);">
-                <p>Aquí irá el contenido de los gráficos y tablas de reportes.</p>
+<h4 class="mb-3">Registrar nueva venta</h4>
+
+<form id="formVenta" class="p-3" style="background: var(--card); border-radius: var(--radius);">
+
+    <div class="mb-3">
+        <label class="form-label">Producto</label>
+        <input type="text" id="producto" class="form-control" placeholder="Nombre del producto" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Cantidad</label>
+        <input type="number" id="cantidad" class="form-control" min="1" placeholder="Ej: 3" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Precio Unitario (C$)</label>
+        <input type="number" id="precio" class="form-control" step="0.01" min="0.01" placeholder="Ej: 120" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registrar Venta</button>
+</form>
+
+<hr class="my-4">
+
+<h4>Filtrar ventas</h4>
+
+<div class="mb-3">
+    <label class="form-label">Filtrar por fecha:</label>
+    <input type="date" id="filtroFecha" class="form-control" onchange="filtrarPorFecha()">
+</div>
+
+<table class="table table-striped table-bordered mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Fecha</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody id="tabla-ventas">
+        <!-- Se llena dinámicamente -->
+    </tbody>
+</table>
                 </div>
             
         </div>
