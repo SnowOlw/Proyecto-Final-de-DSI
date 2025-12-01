@@ -1,3 +1,4 @@
+<!-- ...existing code... -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,13 +7,6 @@
     
     <title>Formulario de Producto</title>
 </head>
-
-
-
-<!---aqui puede ir el scrip para que la tabla lo dijite
-o lo muestre asi en todos pero como tal nose
-que elementos pondra me quede con los brazos cruzado 
-suerte pedro-->
 
 <body >
 <div class="sidebar">
@@ -28,45 +22,133 @@ suerte pedro-->
 
     <a href="inventario_list.html" class="btn">⬅ Volver</a>
 
-    <h2>Formulario de Producto</h2>
+      <h2>Formulario de Producto</h2>
 
-    <form style="margin-top: 25px; display: flex; flex-direction: column; gap: 20px;">
+    <!-- agregado id y campos con ids para que el script los encuentre -->
+    <form id="productoForm" style="margin-top: 25px; display: flex; flex-direction: column; gap: 20px;">
+
+        <!-- hidden para edición -->
+        <input type="hidden" id="productoId" value="">
 
         <div>
             <label>Nombre del Producto</label>
-            <input type="text" placeholder="Ej: Zolo Jeans" required
+            <input id="nombre" name="nombre" type="text" placeholder="Ej: Zolo Jeans" required
                 style="width: 100%; padding: 12px; border-radius: 8px; background: #2a2a2a; color: #fff; border: 1px solid #444;">
         </div>
 
         <div>
             <label>Categoría</label>
-            <input type="text" placeholder="Ej: Almacén / bodega /vuelo " required
+            <input id="categoria" name="categoria" type="text" placeholder="Ej: Almacén / bodega /vuelo " required
                 style="width: 100%; padding: 12px; border-radius: 8px; background: #2a2a2a; color: #fff; border: 1px solid #444;">
         </div>
 
         <div>
-            <label>Stock</label>
-            <input type="number" min="0" placeholder="Ej: 34" required
+            <label>Cantidad</label>
+            <!-- id cambiado a 'cantidad' para que coincida con el script y con la DB -->
+            <input id="cantidad" name="cantidad" type="number" min="0" placeholder="Ej: 34" required
                 style="width: 100%; padding: 12px; border-radius: 8px; background: #2a2a2a; color: #fff; border: 1px solid #444;">
         </div>
 
         <div>
             <label>Precio (C$)</label>
-            <input type="number" min="0" placeholder="Ej: 150" required
+            <input id="precio" name="precio" type="number" min="0" step="0.01" placeholder="Ej: 150" required
                 style="width: 100%; padding: 12px; border-radius: 8px; background: #2a2a2a; color: #fff; border: 1px solid #444;">
         </div>
 
         <div>
             <label>Descripción</label>
-            <textarea placeholder="Detalles opcionales del producto…" rows="4"
+            <textarea id="descripcion" name="descripcion" placeholder="Detalles opcionales del producto…" rows="4"
                 style="width: 100%; padding: 12px; border-radius: 8px; background: #2a2a2a; color: #fff; border: 1px solid #444;"></textarea>
         </div>
-<!--el boton de guardar no hace nada aun falta la coneccion con la api -->
+
         <button class="btn btn-success" type="submit">💾 Guardar</button>
 
     </form>
 
 </div>
 
+<!-- script colocado después del formulario para asegurar que los elementos existen -->
+<script>
+  const API_URL = "http://localhost:1337/api/productos";
+
+  const form = document.getElementById("productoForm");
+  const idInput = document.getElementById("productoId");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // obtener elementos guardando referencias y comprobando existencia
+    const nombreEl = document.getElementById("nombre");
+    const categoriaEl = document.getElementById("categoria");
+    const cantidadEl = document.getElementById("cantidad");
+    const precioEl = document.getElementById("precio");
+    const descripcionEl = document.getElementById("descripcion");
+
+    if (!nombreEl || !categoriaEl || !cantidadEl || !precioEl || !descripcionEl) {
+      console.error("Faltan campos en el formulario. Revisa los ids.");
+      alert("Error: faltan campos en el formulario. Revisa la consola.");
+      return;
+    }
+
+    const nombre = nombreEl.value.trim();
+    const categoria = categoriaEl.value.trim();
+    const cantidad = Number(cantidadEl.value);
+    const precio = Number(precioEl.value);
+    const descripcion = descripcionEl.value.trim();
+
+    if (!nombre || !categoria || Number.isNaN(cantidad) || Number.isNaN(precio)) {
+      alert("Completa los campos obligatorios y asegúrate de valores numéricos válidos.");
+      return;
+    }
+
+    // Payload usando 'cantidad' (nombre del atributo en tu DB)
+    const payload = {
+      data: {
+        nombre,
+        categoria,
+        cantidad,
+        precio,
+        descripcion
+      }
+    };
+
+    try {
+      const headers = { "Content-Type": "application/json", "Accept": "application/json" };
+      // si usas token, añádelo aquí: headers["Authorization"] = `Bearer ${token}`;
+
+      let res;
+      if (idInput.value) {
+        res = await fetch(`${API_URL}/${idInput.value}`, {
+          method: "PUT",
+          headers,
+          body: JSON.stringify(payload)
+        });
+      } else {
+        res = await fetch(API_URL, {
+          method: "POST",
+          headers,
+          body: JSON.stringify(payload)
+        });
+      }
+
+      const result = await res.json().catch(() => null);
+      console.log("Strapi response:", res.status, result);
+
+      if (!res.ok) {
+        const msg = result?.error?.message || result?.message || JSON.stringify(result) || `HTTP ${res.status}`;
+        throw new Error(msg);
+      }
+
+      alert(idInput.value ? "Producto actualizado correctamente." : "Producto registrado correctamente.");
+      window.location.href = "inventario_list.html";
+    } catch (err) {
+      console.error("Error al guardar producto:", err);
+      alert("Error al guardar el producto: " + (err.message || err));
+    }
+  });
+</script>
+
+
 </body>
 </html>
+<!-- ...existing code... -->

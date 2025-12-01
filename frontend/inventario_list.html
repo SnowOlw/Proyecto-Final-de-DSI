@@ -1,3 +1,4 @@
+<!-- ...existing code... -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,12 +6,6 @@
     <link rel="stylesheet" href="style.css">
     <title>Inventario</title>
 </head>
-
-<!---aqui puede ir el scrip para que la tabla lo dijite
-o lo muestre asi en todos pero como tal nose
-que elementos pondra me quede con los brazos cruzado 
-suerte pedro-->
-
 
 <body>
 <div class="sidebar">
@@ -27,59 +22,151 @@ suerte pedro-->
     <a href="index.html" class="btn">⬅ Volver</a>
 
     <h2>Listado de Productos</h2>
-<!-- en si esta sera la base para el listado de 
- los proveedores y reportes pero como yo medio me cuesta 
- el tema del baken prefiero dejarlo con una prueba generada por chatgpt 
- almenos de esta manera podremos cambiar algo o realizar 
- de mejor manera la coneccion con la la api.....y talvez con suerte todo
- funcione -->
+
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Producto</th>
                 <th>Categoría</th>
-                <th>Stock</th>
+                <th>Cantidad</th>
                 <th>Precio</th>
                 <th>Acciones</th>
             </tr>
         </thead>
 
-        <tbody>
-            <tr>
-
-
-
-
-
-
-                <!--eliminar esto para añadir la coneccion con api-->
-                <!-- Datos de ejemplo -->
-              
-                <!-- aqui termina el ejemplo pero 
-                 se puede modificar para que se muestre los datos de la api
-                 aun nose como-->
-
-
-
-
-
-
-
-
-                <!-- botones de acciones-->
-                 <!--modificar los href para que tengan una funcionalidad real aparte de llevarte a los otros 
-                 formuracrio si no que elimine deverdad-->
-                <td>
-                    <a class="btn btn-warning" href="inventario_detail.html">Ver</a>
-                    <a class="btn btn-success" href="inventario_form.html">Editar</a>
-                    <a class="btn btn-danger" href="#">Eliminar</a>
-               
-                    
-            </tr>
+        <tbody id="productosBody">
+            <!-- Filas cargadas por JS -->
         </tbody>
-  </table>
+    </table>
+
 </div>
+
+<!-- ...existing code... -->
+<script>
+  const API_URL = "http://localhost:1337/api/productos";
+  const TOKEN = localStorage.getItem('strapiToken') || null;
+  const productosBody = document.getElementById('productosBody');
+
+  function formatMoney(n) {
+    return Number(n).toLocaleString('es-NI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function firstAttr(obj, keys) {
+    for (const k of keys) {
+      if (obj == null) continue;
+      if (Object.prototype.hasOwnProperty.call(obj, k) && obj[k] != null) return obj[k];
+    }
+    return null;
+  }
+
+  async function fetchProductos() {
+    productosBody.innerHTML = '<tr><td colspan="6">Cargando...</td></tr>';
+    try {
+      const res = await fetch(`${API_URL}?pagination[pageSize]=100`, {
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw new Error(body?.error?.message || body?.message || `HTTP ${res.status}`);
+      }
+
+      const json = await res.json();
+      const items = json?.data || [];
+
+      console.log('fetchProductos => raw response:', json);
+
+      if (!items.length) {
+        productosBody.innerHTML = '<tr><td colspan="6">No hay productos.</td></tr>';
+        return;
+      }
+
+      productosBody.innerHTML = items.map(item => {
+        // item puede venir como { id, attributes } o como objeto plano
+        const id = item?.id ?? item?._id ?? 'N/A';
+        const attrs = item?.attributes ?? item ?? {};
+
+        // buscar posibles nombres de campos en la DB
+        const nombre = firstAttr(attrs, ['nombre', 'name', 'title', 'producto']) ?? '';
+        const categoria = firstAttr(attrs, ['categoria', 'category']) ?? '';
+        const cantidad = firstAttr(attrs, ['cantidad', 'stock', 'quantity']) ?? 0;
+        const precio = firstAttr(attrs, ['precio', 'price', 'valor']) ?? 0;
+
+        return `
+          <tr data-id="${id}">
+            <td>${escapeHtml(String(id))}</td>
+            <td>${escapeHtml(String(nombre))}</td>
+            <td>${escapeHtml(String(categoria))}</td>
+            <td>${escapeHtml(String(cantidad))}</td>
+            <td>C$ ${formatMoney(precio)}</td>
+            <td>
+              <a class="btn btn-warning" href="inventario_detail.html?id=${id}">Ver</a>
+              <a class="btn btn-success" href="inventario_form.html?id=${id}">Editar</a>
+              <button class="btn btn-danger btn-delete" data-id="${id}">Eliminar</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    } catch (err) {
+      console.error('Error cargando productos:', err);
+      productosBody.innerHTML = `
+        <tr>
+          <td colspan="6">
+            Error al cargar productos: ${escapeHtml(String(err.message || err))}
+            <div style="margin-top:8px;">
+              <button id="retryFetch" class="btn">Reintentar</button>
+            </div>
+          </td>
+        </tr>`;
+      const retryBtn = document.getElementById('retryFetch');
+      if (retryBtn) retryBtn.addEventListener('click', fetchProductos);
+    }
+  }
+
+  async function deleteProducto(id, rowEl) {
+    if (!confirm('¿Eliminar este producto? Esta acción no se puede deshacer.')) return;
+    try {
+      const headers = { 'Accept': 'application/json' };
+      if (TOKEN) headers['Authorization'] = `Bearer ${TOKEN}`;
+
+      const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE', headers });
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw new Error(body?.error?.message || body?.message || `HTTP ${res.status}`);
+      }
+      rowEl.remove();
+    } catch (err) {
+      console.error('Error eliminando producto:', err);
+      alert('No se pudo eliminar el producto: ' + (err.message || err));
+    }
+  }
+
+  productosBody.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-delete');
+    if (!btn) return;
+    const id = btn.getAttribute('data-id');
+    const row = btn.closest('tr');
+    if (!id || !row) return;
+    deleteProducto(id, row);
+  });
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  // Ejecutar carga inicial
+  fetchProductos();
+</script>
+<!-- ...existing code... -->
+</body>
+</html>
+<!-- ...existing code... -->
 
 
 
